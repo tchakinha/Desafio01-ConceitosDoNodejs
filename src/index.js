@@ -75,7 +75,7 @@ app.post('/todos', checksExistsUserAccount, (request, response) => {
   const { title, deadline } = request.body
   const { username } = request.headers
 
-  const user = users.find(user => user.username = username)
+  const user = users.find(user => user.username === username)
 
   const todo = {
     id: uuidv4(),
@@ -127,7 +127,8 @@ app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
 
   user.todos.splice(todoIndex, 1)
 
-  return response.status(204).json()
+  return response.status(204).send()
+
 });
 
 module.exports = app;
